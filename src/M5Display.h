@@ -1,14 +1,22 @@
 #ifndef _M5DISPLAY_H_
   #define _M5DISPLAY_H_
 
+  #define LGFX_USE_V1
+  #define LGFX_M5STICK
   #define LGFX_M5STACK_CORE2
+  #define LGFX_M5STICK_C
+  #define LGFX_M5STACK_COREINK
+  #define LGFX_M5PAPER
+  #include "utility/Config.h"
   #include <SD.h>
   #include <SPIFFS.h>
   #include <LGFX_TFT_eSPI.h>
+  #include <vector>
 
   struct DisplayState {
     const lgfx::IFont *gfxFont;
     lgfx::TextStyle style;
+    lgfx::FontMetrics metrics;
     int32_t cursor_x, cursor_y, padX;
   };
 
@@ -16,9 +24,6 @@
     public:
       static M5Display* instance;
       M5Display();
-
-      void clearDisplay(uint32_t color=TFT_BLACK) { fillScreen(color); }
-      void clear(uint32_t color=TFT_BLACK) { fillScreen(color); }
 
       void progressBar(int x, int y, int w, int h, uint8_t val);
 
