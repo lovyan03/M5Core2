@@ -10,6 +10,11 @@
     "type": "git",
     "url": "https://github.com/m5stack/M5Core2.git"
   },
+  "dependencies": [
+    {
+      "name": "LovyanGFX"
+    }
+  ],
   "version": "0.0.2",
   "framework": "arduino",
   "platforms": "espressif32"
