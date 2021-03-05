@@ -46,10 +46,10 @@ uint16_t Point::directionTo(const Point& p, bool rot1 /* = false */) {
   uint16_t a = (uint16_t)(450.5 + (atan2(p.y - y, p.x - x) * 57.29578));
 #ifdef TFT
   if (rot1) {
-    if (TFT->rotation < 4) {
-      a = (((TFT->rotation + 3) % 4) * 90) + a;
+    if (TFT->getRotation() < 4) {
+      a = (((TFT->getRotation() + 3) % 4) * 90) + a;
     } else {
-      a = (((TFT->rotation + 1) % 4) * 90) - a;
+      a = (((TFT->getRotation() + 1) % 4) * 90) - a;
     }
   }
 #endif /* TFT */
@@ -132,9 +132,9 @@ bool Zone::contains(const Point& p) { return contains(p.x, p.y); }
 bool Zone::contains(int16_t x_, int16_t y_) {
 
 #ifdef TFT
-  if (rot1 && TFT->rotation != 1) {
+  if (rot1 && TFT->getRotation() != 1) {
     Zone t = *this;
-    t.rotate(TFT->rotation);
+    t.rotate(TFT->getRotation());
     return (y_ >= t.y && y_ <= t.y + t.h && x_ >= t.x && x_ <= t.x + t.w);
   }
 #endif /* TFT */
@@ -146,8 +146,8 @@ void Zone::rotate(uint8_t m) {
   if (m == 1) return;
   int16_t normal_x = x;
   int16_t normal_y = y;
-  int16_t inv_x = TFT_WIDTH - 1 - x - w;
-  int16_t inv_y = TFT_HEIGHT - 1 - y - h;  // negative for area below screen
+  int16_t inv_x = TFT->width() - 1 - x - w;
+  int16_t inv_y = TFT->height() - 1 - y - h;  // negative for area below screen
   switch (m) {
     case 0:
       x = inv_y;

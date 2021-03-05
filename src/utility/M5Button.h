@@ -867,7 +867,7 @@ class Button : public Zone {
   void draw(ButtonColors bc);
   void draw();
   void hide(uint16_t color = NODRAW);
-  void erase(uint16_t color = BLACK);
+  void erase(uint16_t color = TFT_BLACK);
   void setLabel(const char* label_);
   void setFont(const GFXfont* freeFont_);
   void setFont(uint8_t textFont_ = 0);
@@ -884,7 +884,7 @@ class Button : public Zone {
   bool _compat;  // For TFT_eSPI_Button emulation
   char _label[51];
   uint8_t _textFont;
-  const GFXfont* _freeFont;
+  const lgfx::IFont* _freeFont;
   uint8_t _textSize;
 };
 
@@ -949,7 +949,7 @@ class M5Buttons {
  protected:
   std::vector<EventHandler> _eventHandlers;
   uint8_t _textFont;
-  const GFXfont* _freeFont;
+  const lgfx::IFont* _freeFont;
   uint8_t _textSize;
   bool _leftovers;
 

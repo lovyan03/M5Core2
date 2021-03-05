@@ -105,8 +105,8 @@ bool M5Touch::read() {
   }
 
 #ifdef TFT
-  p[0].rotate(TFT->rotation);
-  p[1].rotate(TFT->rotation);
+  p[0].rotate(TFT->getRotation());
+  p[1].rotate(TFT->getRotation());
 #endif /* TFT */
 
   if (p[0] != point[0] || p[1] != point[1]) {

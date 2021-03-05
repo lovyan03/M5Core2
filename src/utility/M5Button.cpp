@@ -313,7 +313,7 @@ void Button::setTextSize(uint8_t textSize_ /* = 0 */) { _textSize = textSize_; }
 /* static */ void M5Buttons::drawFunction(Button& b, ButtonColors bc) {
   if (bc.bg == NODRAW && bc.outline == NODRAW && bc.text == NODRAW) return;
   Zone z = (b.drawZone) ? b.drawZone : b;
-  if (z.rot1) z.rotate(TFT->rotation);
+  if (z.rot1) z.rotate(TFT->getRotation());
 
   uint8_t r = (b.r == 0xFF) ? min(z.w, z.h) / 4 : b.r;
 
@@ -369,7 +369,7 @@ void Button::setTextSize(uint8_t textSize_ /* = 0 */) { _textSize = textSize_; }
 
     // Save state
     uint8_t tempdatum = TFT->getTextDatum();
-    uint16_t tempPadding = TFT->padX;
+    uint16_t tempPadding = TFT->getTextPadding();
     if (!b._compat) TFT->pushState();
 
     // Actual drawing of text
@@ -380,12 +380,12 @@ void Button::setTextSize(uint8_t textSize_ /* = 0 */) { _textSize = textSize_; }
       TFT->setTextSize(BUTTONS->_textSize);
     if (b._textFont) {
       if (b._freeFont)
-        TFT->setFreeFont(b._freeFont);
+        TFT->setFont(b._freeFont);
       else
         TFT->setTextFont(b._textFont);
     } else {
       if (BUTTONS->_freeFont)
-        TFT->setFreeFont(BUTTONS->_freeFont);
+        TFT->setFont(BUTTONS->_freeFont);
       else
         TFT->setTextFont(BUTTONS->_textFont);
     }
